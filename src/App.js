@@ -23,11 +23,8 @@ const useStyles = makeStyles((theme) => ({
   margenArriba: {
     marginTop: 40,
   }
-}));
 
-function App() {
 
-  const classes = useStyles();
 
   return (
     <Container fixed>
@@ -79,38 +76,6 @@ function App() {
             </Grid>
 
 
-            <Grid item xs={2}>
-            </Grid>
-            <Grid item xs={2}>
-              <Paper className={classes.paper}>
-                <Button variant="outlined" color="primary">
-                  7
-                </Button>
-              </Paper>
-            </Grid>
-            <Grid item xs={2}>
-              <Paper className={classes.paper}>
-                <Button variant="outlined" color="primary">
-                  8
-                </Button>
-              </Paper>
-            </Grid>
-            <Grid item xs={2}>
-              <Paper className={classes.paper}>
-                <Button variant="outlined" color="primary">
-                  9
-               </Button>
-              </Paper>
-            </Grid>
-            <Grid item xs={2}>
-              <Paper className={classes.paper}>
-                <Button variant="outlined" color="primary">
-                  *
-                </Button>
-              </Paper>
-            </Grid>
-            <Grid item xs={2}>
-            </Grid>
 
 
 
@@ -226,7 +191,3 @@ function App() {
       </Typography>
     </Container>
 
-  );
-}
-
-export default App;
