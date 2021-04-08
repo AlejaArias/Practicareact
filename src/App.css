@@ -25,7 +25,7 @@
 }
 
 .App-link {
-  color: #61dafb;
+  color: #fb9e61;
 }
 
 @keyframes App-logo-spin {
@@ -35,4 +35,41 @@
   to {
     transform: rotate(360deg);
   }
+}
+
+.result {
+  height: 60px;
+  
+  width: 100%;
+}
+
+.result p {
+  font-size: 40px;
+  margin: 5px;
+
+}
+
+.calculator-body {
+  max-width: 450px;
+  margin: auto;
+  margin-top: 4%;
+  padding      : 5px;
+  border       : 15 px solid rgb(175, 174, 226);
+  background   : none;
+  background-color: #f6f6f8;
+}
+
+.button {
+  
+  background-color: rgb(73, 6, 228);
+  width: 90%;
+  height: 60px;
+  font-size: 30px;
+  margin-left: 100px;
+  
+}
+
+.result .title{
+  font-size: 40px;
+
 }

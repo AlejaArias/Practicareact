@@ -1,193 +1,84 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import Button from '@material-ui/core/Button';
-import Container from "@material-ui/core/Container"
-import Typography from "@material-ui/core/Typography"
-import { makeStyles } from '@material-ui/core/styles';
-import Paper from '@material-ui/core/Paper';
-import Grid from '@material-ui/core/Grid';
-import TextField from "@material-ui/core/TextField";
-import { createMuiTheme } from '@material-ui/core/styles';
+import React, { Component } from 'react';
+import '../App.css';
+import ResultComponent from './componentes/ResultComponent';
+import KeyPadComponent from "./componentes/KeyPadComponent";
 
 
+class App extends Component {
+    constructor(){
+        super();
 
-const useStyles = makeStyles((theme) => ({
-  root: {
-    flexGrow: 1,
-  },
-  paper: {
-    padding: theme.spacing(2),
-    textAlign: 'center',
-    color: theme.palette.text.secondary,
-  },
-  margenArriba: {
-    marginTop: 40,
-  }
+        this.state = {
+            result: ""
+        }
+    }
 
+    onClick = button => {
 
+        if(button === "="){
+            this.calculate()
+        }
 
-  return (
-    <Container fixed>
-      <Typography component="div" className={classes.margenArriba} style={{ backgroundColor: '#c0c0c0', height: '100vh' }} >
+        else if(button === "CA"){
+            this.reset()
+        }
+        else if(button === "CE"){
+            this.backspace()
+        }
 
-        <div className={classes.root}>
-          <Grid container spacing={2}>
-            <Grid item xs={12}>
-              <Paper className={classes.paper}>
-                <form className={classes.root} noValidate autoComplete="off">
-                  <TextField id="outlined-basic" fullWidth size="medium" label="Ingrese un valor" variant="outlined" />
-                </form>
-              </Paper>
-            </Grid>
-
-
-            <Grid item xs={2}>
-            </Grid>
-            <Grid item xs={2}>
-              <Paper className={classes.paper}>
-                <Button variant="contained" color="secondary">
-                  AC
-                </Button>
-              </Paper>
-            </Grid>
-            <Grid item xs={2}>
-              <Paper className={classes.paper}>
-                <Button variant="outlined" color="primary">
-                  CE
-                </Button>
-              </Paper>
-            </Grid>
-            <Grid item xs={2}>
-              <Paper className={classes.paper}>
-                <Button variant="outlined" color="primary">
-
-                  %
-               </Button>
-              </Paper>
-            </Grid>
-            <Grid item xs={2}>
-              <Paper className={classes.paper}>
-                <Button variant="outlined" color="primary">
-                  /
-                </Button>
-              </Paper>
-            </Grid>
-            <Grid item xs={2}>
-            </Grid>
+        else {
+            this.setState({
+                result: this.state.result + button
+            })
+        }
+    };
 
 
+    calculate = () => {
+        var checkResult = ''
+        if(this.state.result.includes('--')){
+            checkResult = this.state.result.replace('--','+')
+        }
 
+        else {
+            checkResult = this.state.result
+        }
 
+        try {
+            this.setState({
+                // eslint-disable-next-line
+                result: (eval(checkResult) || "" ) + ""
+            })
+        } catch (e) {
+            this.setState({
+                result: "error"
+            })
 
-            <Grid item xs={2}>
-            </Grid>
-            <Grid item xs={2}>
-              <Paper className={classes.paper}>
-                <Button variant="outlined" color="primary">
-                  4
-                </Button>
-              </Paper>
-            </Grid>
-            <Grid item xs={2}>
-              <Paper className={classes.paper}>
-                <Button variant="outlined" color="primary">
-                  5
-                </Button>
-              </Paper>
-            </Grid>
-            <Grid item xs={2}>
-              <Paper className={classes.paper}>
-                <Button variant="outlined" color="primary">
-                  6
-               </Button>
-              </Paper>
-            </Grid>
-            <Grid item xs={2}>
-              <Paper className={classes.paper}>
-                <Button variant="outlined" color="primary">
-                  -
-                </Button>
-              </Paper>
-            </Grid>
-            <Grid item xs={2}>
-            </Grid>
+        }
+    };
 
+    reset = () => {
+        this.setState({
+            result: ""
+        })
+    };
 
+    backspace = () => {
+        this.setState({
+            result: this.state.result.slice(0, -1)
+        })
+    };
 
-            <Grid item xs={2}>
-            </Grid>
-            <Grid item xs={2}>
-              <Paper className={classes.paper}>
-                <Button variant="outlined" color="primary">
-                  1
-                </Button>
-              </Paper>
-            </Grid>
-            <Grid item xs={2}>
-              <Paper className={classes.paper}>
-                <Button variant="outlined" color="primary">
-                  2
-                </Button>
-              </Paper>
-            </Grid>
-            <Grid item xs={2}>
-              <Paper className={classes.paper}>
-                <Button variant="outlined" color="primary">
-                  3
-               </Button>
-              </Paper>
-            </Grid>
-            <Grid item xs={2}>
-              <Paper className={classes.paper}>
-                <Button variant="outlined" color="primary"  >
-                  +
-                </Button>
-              </Paper>
-            </Grid>
-            <Grid item xs={2}>
-            </Grid>
+    render() {
+        return (
+            <div>
+                <div className="calculator-body">                    
+                    <ResultComponent result={this.state.result}/>
+                    <KeyPadComponent onClick={this.onClick}/>
+                </div>
+            </div>
+        );
+    }
+}
 
-
-            <Grid item xs={2}>
-            </Grid>
-            <Grid item xs={2}>
-              <Paper className={classes.paper}>
-                <Button variant="outlined" color="primary">
-                  0
-                </Button>
-              </Paper>
-            </Grid>
-            <Grid item xs={2}>
-              <Paper className={classes.paper}>
-                <Button variant="outlined" color="primary">
-                  .
-                </Button>
-              </Paper>
-            </Grid>
-            <Grid item xs={2}>
-              <Paper className={classes.paper}>
-                <Button variant="outlined" color="primary">
-                  =
-               </Button>
-              </Paper>
-            </Grid>
-
-            <Grid item xs={2}>
-              <Paper className={classes.paper}>
-                <Button variant="outlined" color="primary"  >
-                  Borrar
-                </Button>
-              </Paper>
-            </Grid>
-            <Grid item xs={2}>
-            </Grid>
-
-          </Grid>
-
-
-        </div>
-
-
-      </Typography>
-    </Container>
-
+export default App;
